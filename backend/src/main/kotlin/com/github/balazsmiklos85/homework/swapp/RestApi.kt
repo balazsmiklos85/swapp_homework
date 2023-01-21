@@ -23,7 +23,7 @@ class RestApi {
     }
 
     @PostMapping("/invoice")
-    fun createInvoice(@RequestBody invoiceData: List<Row>) : String {
+    fun createInvoice(@RequestBody invoiceData: List<Row>) : String { // TODO do not return a String, return it in a JSON Object instead
         val invoice = Invoice(invoiceData)
         invoice.generate()
         return invoice.fileName

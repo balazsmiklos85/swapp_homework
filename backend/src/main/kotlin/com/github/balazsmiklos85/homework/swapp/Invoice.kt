@@ -24,7 +24,7 @@ class Invoice {
 
     constructor(invoiceData: List<Row>) : this(filterInvoiceData(invoiceData), calculateTotal(invoiceData))
 
-    fun generate() {
+    fun generate() { // TODO make this more testable
         val file = File("$STORAGE_DIRECTORY/$fileName")
         val writer = PdfWriter(file)
         val pdf = PdfDocument(writer)
