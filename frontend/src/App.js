@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import LoadTable from './LoadTable';
 
 function App() {
+    const backendUrl = 'http://localhost:8080'
+
     const [response, setResponse] = useState('');
 
     const handleClick = async (event) => {
@@ -29,9 +31,9 @@ function App() {
             }
         };
 
-        const res = await fetch('http://localhost:8080/invoice', options); // TODO use a constant for the URL
+        const res = await fetch(backendUrl + "/invoice", options);
         const json = await res.json();
-        setResponse("http://localhost:8080/invoices/" + json.id);
+        setResponse( backendUrl + "/invoices/" + json.id);
     }
   
   return (
