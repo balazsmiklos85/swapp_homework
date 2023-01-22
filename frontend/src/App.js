@@ -1,5 +1,5 @@
 import './App.css';
-// import 'antd/dist/antd.css'; Doesn't work. No idea why. // TODO make this look nice
+// import 'antd/dist/antd.css'; Doesn't work. No idea why. // TODO make this work, so the table looks nice
 import React, { useState } from 'react';
 import LoadTable from './LoadTable';
 
