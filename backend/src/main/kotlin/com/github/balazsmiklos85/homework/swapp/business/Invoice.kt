@@ -51,9 +51,9 @@ class Invoice(dataWithPrices: List<Row>, filteredInvoiceData: List<Row>) {
 
     private fun lookUpAmount(dataWithPrices: List<Row>, name: String) : BigDecimal {
         return dataWithPrices.stream()
-                                     .filter { it.name == name }
-                                     .findFirst()
-                                     .map { it.amount }
-                                     .orElseThrow { ItemNotFoundException("Unknown item cannot be added to the invoice") }
+                             .filter { it.name == name }
+                             .findFirst()
+                             .map { it.amount }
+                             .orElseThrow { ItemNotFoundException("Unknown item cannot be added to the invoice") }
     }
 }
