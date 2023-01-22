@@ -30,21 +30,4 @@ class RestApi {
         invoice.generate()
         return invoice.id
     }
-
-    // FIXME remove before releasing
-    @GetMapping("/invoice")
-    fun testInvoiceCreation() : String {
-        val invoiceData = listOf(
-              Row("Hamburger", BigDecimal("5.49"), true),
-              Row("Big Hamburger", BigDecimal("6.93"), true),
-              Row("Small Hamburger", BigDecimal("2.87"), true),
-              Row("Chicken Burger", BigDecimal("6.54"), true),
-              Row("Fish Burger", BigDecimal("5.23"), true),
-              Row("Small Fries", BigDecimal("2.34"), true),
-              Row("Medium Fries", BigDecimal("2.87"), true),
-              Row("Large Fries", BigDecimal("3.13"), true))
-        val invoice = Invoice(invoiceData)
-        invoice.generate()
-        return invoice.id
-    }
 }
