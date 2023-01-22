@@ -9,15 +9,29 @@ function App() {
     const handleClick = async (event) => {
         event.preventDefault()
         setResponse(null);
-        const formData = new FormData(event.target);
+
+        const form = event.target
+        var data = Array.from(form)
+                          .filter(child => child.tagName === 'INPUT')
+                          .filter(input => input.checked)
+                          .map(input => {
+                              var result = {}
+                              result['name'] = input.name;
+                              result['amount'] = 0.0; //TODO the backend shouldn't need this
+                              result['selected'] = true;
+                              return result;
+                          });
 
         const options = {
             method: 'POST',
-            body: formData
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
         };
 
         const res = await fetch('http://localhost:8080/invoice', options); // TODO use a constant for the URL
-        const json = await res.json();
+        const json = await res.text(); //TODO the backend should return .json();
         setResponse("http://localhost:8080/invoices/" + json);
     }
   

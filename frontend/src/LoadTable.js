@@ -21,7 +21,7 @@ function LoadTable() {
                 <td>{item.name}</td>
                 <td>{item.amount}</td>
                 <td>
-                    <input type="checkbox" id="{item.name}-selected" value="false" />
+                    <input type="checkbox" id={item.name + "-selected"} name={item.name} />
                 </td>
             </tr>
             ))}
