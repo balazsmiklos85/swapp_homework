@@ -6,13 +6,13 @@ import io.swagger.annotations.ApiOperation
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
-import org.springframework.ui.set
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.core.io.FileSystemResource
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.servlet.view.RedirectView
 
 @Controller
 @Api(value = "PDF file access.",
@@ -21,9 +21,8 @@ class PdfController(val storageService: StorageService) {
     private val logger = LoggerFactory.getLogger(PdfController::class.java)
 
     @GetMapping("/")
-    fun redirect(model: Model): String { //TODO it should redirect to the nodejs host
-        model["title"] = "Generate invoice"
-        return "generate_invoice"
+    fun redirect(model: Model): RedirectView {
+        return RedirectView("http://localhost:3000")
     }
 
     @ApiOperation(value = "Generates invoices.",
