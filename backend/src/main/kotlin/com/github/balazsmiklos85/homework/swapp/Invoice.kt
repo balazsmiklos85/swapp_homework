@@ -29,7 +29,7 @@ class Invoice {
         val writer = PdfWriter(file)
         val pdf = PdfDocument(writer)
         val doc = Document(pdf)
-        val table = Table(2)
+        val table = Table(2) //TODO add table header
         invoiceData.forEach { row ->
             table.addCell(createCell("${row.name}:"))
             table.addCell(createCell("${row.amount}"))
