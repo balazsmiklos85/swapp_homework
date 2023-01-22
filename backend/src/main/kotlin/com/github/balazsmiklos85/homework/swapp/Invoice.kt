@@ -12,19 +12,19 @@ import java.util.UUID
 
 const val STORAGE_DIRECTORY = "/tmp"
 
-class Invoice {
+class Invoice(dataWithPrices: List<Row>, filteredInvoiceData: List<Row>) {
     val id: String = UUID.randomUUID().toString()
     private val invoiceData: List<Row>
     private val total: BigDecimal
 
-    constructor(dataWithPrices: List<Row>, filteredInvoiceData: List<Row>, total: BigDecimal) { // TODO can this be private somehow?
+    init {
         this.invoiceData = filteredInvoiceData.stream()
                                               .map { Row(it.name, lookUpAmount(dataWithPrices, it.name), true) } // TODO selected is not needed here either
                                               .toList()
-        this.total = total
+        this.total = invoiceData.stream()
+                                .map { row -> row.amount }
+                                .reduce(BigDecimal.ZERO) { result, amount -> result + amount }
     }
-
-    constructor(dataWithPrices: List<Row>, invoiceData: List<Row>) : this(dataWithPrices, filterInvoiceData(invoiceData), calculateTotal(invoiceData))
 
     fun generate() { // TODO make this more testable
         val file = File("$STORAGE_DIRECTORY/invoice-$id.pdf")
@@ -53,20 +53,5 @@ class Invoice {
                                      .findFirst()
                                      .map { it.amount }
                                      .orElseThrow { NoSuchElementException("Unknown item cannot be added to the invoice") }
-    }
-
-    companion object {
-        private fun calculateTotal(invoiceData: List<Row>): BigDecimal {
-            return invoiceData.stream()
-                .map { row -> row.amount }
-                .reduce(BigDecimal.ZERO) { result, amount -> result + amount }
-        }
-
-        private fun filterInvoiceData(invoiceData: List<Row>): List<Row> {
-            return invoiceData.stream()
-                .filter { row -> row != null }
-                .filter { row -> row.selected }
-                .toList()
-        }
     }
 }
