@@ -19,7 +19,6 @@ function App() {
                           .map(input => {
                               var result = {}
                               result['name'] = input.name;
-                              result['selected'] = true;
                               return result;
                           });
 
