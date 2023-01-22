@@ -1,5 +1,7 @@
 package com.github.balazsmiklos85.homework.swapp
 
+import io.swagger.annotations.Api
+import io.swagger.annotations.ApiOperation
 import java.math.BigDecimal
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
@@ -9,7 +11,11 @@ import org.springframework.web.bind.annotation.RestController
 
 @CrossOrigin(origins = ["*"])
 @RestController
+@Api(value = "Invoice generation",
+     description = "Handles invoice generation. Provides data that can be used in invoices, and generates the invoice files.")
 class RestApi {
+    @ApiOperation(value = "Gets items for the invoice generation.",
+                  notes = "Items have a name and a price (amount) and they can be used as an input for the invoice generation.")
     @GetMapping("/data")
     fun getData(): List<Row> { // TODO: these values don't need "selected" values yet
         return listOf(
@@ -24,6 +30,8 @@ class RestApi {
         )
     }
 
+    @ApiOperation(value = "Generates invoices.",
+                  notes = "Invoice generation produces a PDF file. The file can be accessed by the ID provided in the result at /invoices/{id}")
     @PostMapping("/invoice")
     fun createInvoice(@RequestBody invoiceData: List<Row>) : String { // TODO do not return a String, return it in a JSON Object instead
         val invoice = Invoice(getData(), invoiceData)
