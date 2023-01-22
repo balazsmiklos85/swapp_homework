@@ -33,7 +33,9 @@ class Invoice(dataWithPrices: List<Row>, filteredInvoiceData: List<Row>) {
         val writer = PdfWriter(file)
         val pdf = PdfDocument(writer)
         val doc = Document(pdf)
-        val table = Table(2) //TODO add table header
+        val table = Table(2)
+        table.addCell(createCell("Name"))
+        table.addCell(createCell("Amount"))
         invoiceData.forEach { row ->
             table.addCell(createCell("${row.name}:"))
             table.addCell(createCell("${row.amount}"))
