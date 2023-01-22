@@ -17,7 +17,6 @@ function App() {
                           .map(input => {
                               var result = {}
                               result['name'] = input.name;
-                              result['amount'] = 0.0; //TODO the backend shouldn't need this
                               result['selected'] = true;
                               return result;
                           });
