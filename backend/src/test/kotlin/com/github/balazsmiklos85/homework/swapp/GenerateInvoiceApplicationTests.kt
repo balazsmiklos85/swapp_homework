@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest
 class GenerateInvoiceApplicationTests {
 
 	@Test
-	fun contextLoads() {
+	fun `Loading context`() {
 	}
 
 }

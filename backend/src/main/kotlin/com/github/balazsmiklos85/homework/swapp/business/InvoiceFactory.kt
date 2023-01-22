@@ -1,5 +1,6 @@
 package com.github.balazsmiklos85.homework.swapp.business
 
+import com.github.balazsmiklos85.homework.swapp.data.Invoice
 import com.github.balazsmiklos85.homework.swapp.data.InvoiceRow
 import com.github.balazsmiklos85.homework.swapp.data.InvoiceSelection
 import com.github.balazsmiklos85.homework.swapp.error.ItemNotFoundException
