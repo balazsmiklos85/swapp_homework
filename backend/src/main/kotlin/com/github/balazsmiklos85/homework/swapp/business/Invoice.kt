@@ -1,6 +1,7 @@
 package com.github.balazsmiklos85.homework.swapp.business
 
-import com.github.balazsmiklos85.homework.swapp.data.Row
+import com.github.balazsmiklos85.homework.swapp.data.InvoiceRow
+import com.github.balazsmiklos85.homework.swapp.data.InvoiceSelection
 import com.github.balazsmiklos85.homework.swapp.error.ItemNotFoundException
 import com.itextpdf.kernel.pdf.PdfDocument
 import com.itextpdf.kernel.pdf.PdfWriter
@@ -14,14 +15,14 @@ import java.util.UUID
 
 const val STORAGE_DIRECTORY = "/tmp"
 
-class Invoice(dataWithPrices: List<Row>, filteredInvoiceData: List<Row>) {
+class Invoice(prices: List<InvoiceRow>, filteredInvoiceData: List<InvoiceSelection>) {
     val id: String = UUID.randomUUID().toString()
-    private val invoiceData: List<Row>
+    private val invoiceData: List<InvoiceRow>
     private val total: BigDecimal
 
     init {
         this.invoiceData = filteredInvoiceData.stream()
-                                              .map { Row(it.name, lookUpAmount(dataWithPrices, it.name), true) } // TODO selected is not needed here either
+                                              .map { InvoiceRow(it.name, lookUpAmount(prices, it.name)) }
                                               .toList()
         this.total = invoiceData.stream()
                                 .map { row -> row.amount }
@@ -51,7 +52,7 @@ class Invoice(dataWithPrices: List<Row>, filteredInvoiceData: List<Row>) {
         return result
     }
 
-    private fun lookUpAmount(dataWithPrices: List<Row>, name: String) : BigDecimal {
+    private fun lookUpAmount(dataWithPrices: List<InvoiceRow>, name: String) : BigDecimal {
         return dataWithPrices.stream()
                              .filter { it.name == name }
                              .findFirst()
