@@ -52,6 +52,6 @@ class Invoice(dataWithPrices: List<Row>, filteredInvoiceData: List<Row>) {
                                      .filter { it.name == name }
                                      .findFirst()
                                      .map { it.amount }
-                                     .orElseThrow { NoSuchElementException("Unknown item cannot be added to the invoice") }
+                                     .orElseThrow { ItemNotFoundException("Unknown item cannot be added to the invoice") }
     }
 }

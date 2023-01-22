@@ -8,12 +8,15 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
+import org.slf4j.LoggerFactory
 
 @CrossOrigin(origins = ["*"])
 @RestController
 @Api(value = "Invoice generation",
      description = "Handles invoice generation. Provides data that can be used in invoices, and generates the invoice files.")
 class RestApi {
+    private val logger = LoggerFactory.getLogger(RestApi::class.java)
+
     @ApiOperation(value = "Gets items for the invoice generation.",
                   notes = "Items have a name and a price (amount) and they can be used as an input for the invoice generation.")
     @GetMapping("/data")
