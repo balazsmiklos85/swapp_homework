@@ -1,4 +1,4 @@
-package com.github.balazsmiklos85.homework.swapp
+package com.github.balazsmiklos85.homework.swapp.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -10,8 +10,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
 
 @Configuration
 @EnableSwagger2
-class SwaggerConfig {
-
+class SwaggerConfiguration {
     @Bean
     fun api(): Docket {
         return Docket(DocumentationType.SWAGGER_2)

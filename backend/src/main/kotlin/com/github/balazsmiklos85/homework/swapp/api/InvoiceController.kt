@@ -1,5 +1,6 @@
-package com.github.balazsmiklos85.homework.swapp
+package com.github.balazsmiklos85.homework.swapp.api
 
+import com.github.balazsmiklos85.homework.swapp.business.STORAGE_DIRECTORY
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.stereotype.Controller

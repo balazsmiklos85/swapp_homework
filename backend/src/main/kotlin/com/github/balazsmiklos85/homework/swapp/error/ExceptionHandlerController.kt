@@ -1,4 +1,4 @@
-package com.github.balazsmiklos85.homework.swapp
+package com.github.balazsmiklos85.homework.swapp.error
 
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

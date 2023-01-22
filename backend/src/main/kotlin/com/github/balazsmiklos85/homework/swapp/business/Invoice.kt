@@ -1,5 +1,7 @@
-package com.github.balazsmiklos85.homework.swapp
+package com.github.balazsmiklos85.homework.swapp.business
 
+import com.github.balazsmiklos85.homework.swapp.data.Row
+import com.github.balazsmiklos85.homework.swapp.error.ItemNotFoundException
 import com.itextpdf.kernel.pdf.PdfDocument
 import com.itextpdf.kernel.pdf.PdfWriter
 import com.itextpdf.layout.Document

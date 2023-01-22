@@ -1,4 +1,4 @@
-package com.github.balazsmiklos85.homework.swapp 
+package com.github.balazsmiklos85.homework.swapp.error
 
 class ErrorMessageModel(
     var status: Int? = null,

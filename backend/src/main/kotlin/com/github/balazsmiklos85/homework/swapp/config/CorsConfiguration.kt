@@ -1,3 +1,5 @@
+package com.github.balazsmiklos85.homework.swapp.config
+
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.cors.CorsConfiguration

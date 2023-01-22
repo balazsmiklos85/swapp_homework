@@ -1,5 +1,7 @@
-package com.github.balazsmiklos85.homework.swapp
+package com.github.balazsmiklos85.homework.swapp.api
 
+import com.github.balazsmiklos85.homework.swapp.business.Invoice
+import com.github.balazsmiklos85.homework.swapp.data.Row
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import java.math.BigDecimal
