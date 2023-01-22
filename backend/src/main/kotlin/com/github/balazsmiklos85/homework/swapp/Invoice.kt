@@ -10,10 +10,10 @@ import java.io.File
 import java.math.BigDecimal
 import java.util.UUID
 
-private const val STORAGE_DIRECTORY = "/tmp"
+public const val STORAGE_DIRECTORY = "/tmp"
 
 class Invoice {
-    val fileName: String="invoice-${UUID.randomUUID()}.pdf"
+    val id: String = UUID.randomUUID().toString()
     private val invoiceData: List<Row>
     private val total: BigDecimal
 
@@ -25,7 +25,7 @@ class Invoice {
     constructor(invoiceData: List<Row>) : this(filterInvoiceData(invoiceData), calculateTotal(invoiceData))
 
     fun generate() { // TODO make this more testable
-        val file = File("$STORAGE_DIRECTORY/$fileName")
+        val file = File("$STORAGE_DIRECTORY/invoice-$id.pdf")
         val writer = PdfWriter(file)
         val pdf = PdfDocument(writer)
         val doc = Document(pdf)

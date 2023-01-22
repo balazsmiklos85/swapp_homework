@@ -28,7 +28,7 @@ class RestApi {
     fun createInvoice(@RequestBody invoiceData: List<Row>) : String { // TODO do not return a String, return it in a JSON Object instead
         val invoice = Invoice(invoiceData)
         invoice.generate()
-        return invoice.fileName
+        return invoice.id
     }
 
     // FIXME remove before releasing
@@ -45,6 +45,6 @@ class RestApi {
               Row("Large Fries", BigDecimal("3.13"), true))
         val invoice = Invoice(invoiceData)
         invoice.generate()
-        return invoice.fileName
+        return invoice.id
     }
 }
