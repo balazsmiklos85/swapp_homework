@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class RestApi {
     @GetMapping("/data")
-    fun getData(): List<Row> {
+    fun getData(): List<Row> { // TODO: these values don't need "selected" values yet
         return listOf(
                 Row("Hamburger", BigDecimal("5.49")),
                 Row("Big Hamburger", BigDecimal("6.93")),
