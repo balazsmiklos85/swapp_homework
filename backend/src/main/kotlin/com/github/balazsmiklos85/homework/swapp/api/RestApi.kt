@@ -24,6 +24,7 @@ class RestApi {
                   notes = "Items have a name and a price (amount) and they can be used as an input for the invoice generation.")
     @GetMapping("/data")
     fun getData(): List<InvoiceRow> {
+        logger.info("Data fetched.")
         return listOf(
                 InvoiceRow("Hamburger", BigDecimal("5.49")),
                 InvoiceRow("Big Hamburger", BigDecimal("6.93")),
@@ -42,6 +43,7 @@ class RestApi {
     fun createInvoice(@RequestBody invoiceData: List<InvoiceSelection>) : String { // TODO do not return a String, return it in a JSON Object instead
         val invoice = Invoice(getData(), invoiceData)
         invoice.generate()
+        logger.info("{} invoice created.", invoice.id)
         return invoice.id
     }
 }

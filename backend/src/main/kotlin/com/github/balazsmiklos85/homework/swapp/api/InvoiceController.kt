@@ -3,6 +3,7 @@ package com.github.balazsmiklos85.homework.swapp.api
 import com.github.balazsmiklos85.homework.swapp.business.STORAGE_DIRECTORY
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
@@ -18,6 +19,8 @@ import java.io.File
 @Api(value = "PDF file access.",
      description = "Provides downloads for the generated invoices.")
 class InvoiceController {
+    private val logger = LoggerFactory.getLogger(RestApi::class.java)
+
     @GetMapping("/")
     fun redirect(model: Model): String { //TODO it should redirect to the nodejs host
         model["title"] = "Generate invoice"
@@ -29,11 +32,13 @@ class InvoiceController {
     @GetMapping("/invoices/{id}")
     fun download(@PathVariable id: String): ResponseEntity<FileSystemResource> {
         return if (File("$STORAGE_DIRECTORY/invoice-$id.pdf").exists()) { // TODO duplicated logic for path resolution
+            logger.info("$id invoice fetched.")
             ResponseEntity.ok()
                           .contentType(MediaType.APPLICATION_PDF)
                           .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=invoice-$id.pdf") // TODO include in path refactor
                           .body(FileSystemResource("$STORAGE_DIRECTORY/invoice-$id.pdf")) // TODO include in path refactor
         } else {
+            logger.warn("Non-existent invoice '$id' fetched.")
             ResponseEntity.notFound().build()
         }
     }
