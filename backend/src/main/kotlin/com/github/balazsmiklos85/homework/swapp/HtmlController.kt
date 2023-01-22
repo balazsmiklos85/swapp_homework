@@ -6,7 +6,7 @@ import org.springframework.ui.set
 import org.springframework.web.bind.annotation.GetMapping
 
 @Controller
-class HtmlController {
+class HtmlController { //TODO it should redirect to the nodejs host
     @GetMapping("/")
     fun blog(model: Model): String {
         model["title"] = "Generate invoice"
