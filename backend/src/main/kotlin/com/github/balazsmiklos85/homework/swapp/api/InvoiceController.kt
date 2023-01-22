@@ -5,6 +5,7 @@ import com.github.balazsmiklos85.homework.swapp.data.InvoiceRow
 import com.github.balazsmiklos85.homework.swapp.data.InvoiceSelection
 import com.github.balazsmiklos85.homework.swapp.business.InvoiceFactory
 import com.github.balazsmiklos85.homework.swapp.business.PdfFactory
+import com.github.balazsmiklos85.homework.swapp.data.PdfResource
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.web.bind.annotation.CrossOrigin
@@ -32,10 +33,10 @@ class InvoiceController(val dataService: DataService, val invoiceFactory: Invoic
     @ApiOperation(value = "Generates invoices.",
                   notes = "Invoice generation produces a PDF file. The file can be accessed by the ID provided in the result at /invoices/{id}")
     @PostMapping("/invoice")
-    fun createInvoice(@RequestBody invoiceSelection: List<InvoiceSelection>) : String { // TODO do not return a String, return it in a JSON Object instead
+    fun createInvoice(@RequestBody invoiceSelection: List<InvoiceSelection>) : PdfResource {
         val invoice = invoiceFactory.create(invoiceSelection)
         val id = pdfFactory.save(invoice)
         logger.info("{} invoice created.", id)
-        return id
+        return PdfResource(id)
     }
 }
