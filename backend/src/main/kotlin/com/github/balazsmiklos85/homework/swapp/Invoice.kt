@@ -36,7 +36,7 @@ class Invoice {
             table.addCell(createCell("${row.name}:"))
             table.addCell(createCell("${row.amount}"))
         }
-        doc.add(table);
+        doc.add(table)
         doc.add(Paragraph("Total Amount: $total"))
         doc.close()
     }
