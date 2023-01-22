@@ -10,19 +10,21 @@ import java.io.File
 import java.math.BigDecimal
 import java.util.UUID
 
-public const val STORAGE_DIRECTORY = "/tmp"
+const val STORAGE_DIRECTORY = "/tmp"
 
 class Invoice {
     val id: String = UUID.randomUUID().toString()
     private val invoiceData: List<Row>
     private val total: BigDecimal
 
-    constructor(filteredInvoiceData: List<Row>, total: BigDecimal) {
-        this.invoiceData = filteredInvoiceData
+    constructor(dataWithPrices: List<Row>, filteredInvoiceData: List<Row>, total: BigDecimal) { // TODO can this be private somehow?
+        this.invoiceData = filteredInvoiceData.stream()
+                                              .map { Row(it.name, lookUpAmount(dataWithPrices, it.name), true) } // TODO selected is not needed here either
+                                              .toList()
         this.total = total
     }
 
-    constructor(invoiceData: List<Row>) : this(filterInvoiceData(invoiceData), calculateTotal(invoiceData))
+    constructor(dataWithPrices: List<Row>, invoiceData: List<Row>) : this(dataWithPrices, filterInvoiceData(invoiceData), calculateTotal(invoiceData))
 
     fun generate() { // TODO make this more testable
         val file = File("$STORAGE_DIRECTORY/invoice-$id.pdf")
@@ -43,6 +45,14 @@ class Invoice {
         val result = Cell()
         result.add(Paragraph(text))
         return result
+    }
+
+    private fun lookUpAmount(dataWithPrices: List<Row>, name: String) : BigDecimal {
+        return dataWithPrices.stream()
+                                     .filter { it.name == name }
+                                     .findFirst()
+                                     .map { it.amount }
+                                     .orElseThrow { NoSuchElementException("Unknown item cannot be added to the invoice") }
     }
 
     companion object {
